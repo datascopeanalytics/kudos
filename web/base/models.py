@@ -1,1 +1,10 @@
-""" Basic models, such as user profile """
+from django.db import models
+from django.contrib.auth.models import User
+
+
+class Kudo(models.Model):
+    giver = models.ForeignKey(User, related_name='giver')
+    receivers = models.ManyToManyField(User, related_name='receivers')
+    date = models.DateField(auto_now_add=True)
+    count = models.IntegerField(default=1)
+    message = models.CharField(max_length=140, null=True, blank=True)
