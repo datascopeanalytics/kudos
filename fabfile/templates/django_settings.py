@@ -29,6 +29,8 @@ DATABASES = {
     },
 }
 
+SITE_ID = %(django_site_id)d
+
 # Recipients of traceback emails and other notifications.
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),

@@ -131,7 +131,6 @@ def setup_database():
 def setup_django():
     """render settings and collectstatic
     """
-    print utils.remote_templates_root()
     fabtools.files.upload_template(
         os.path.join(utils.fabfile_templates_root(), "django_settings.py"),
         os.path.join(env.web_path, "web/settings/local.py"),

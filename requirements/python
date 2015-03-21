@@ -1,6 +1,7 @@
 PyGithub
 Fabric
 Django>=1.7
+django-allauth
 
 # django-base-template requirements
 MySQL-python

@@ -27,6 +27,7 @@ def dev():
     env.config_type = 'dev'
     env.use_repository = False
     env.site_name = None
+    env.django_site_id = 1
 
     utils.set_hosts_from_config()
     execute(vagrant, env.hosts[0])
