@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     # Third-party apps, patches, fixes
     'djcelery',
     'compressor',
+    'bootstrapform',
 
     # allauth
     'allauth',

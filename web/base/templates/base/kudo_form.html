@@ -1,4 +1,5 @@
 {% extends "_layouts/base.html" %}
+{% load bootstrap %}
 
 {% block css %}
 {{block.super}}
@@ -11,7 +12,14 @@
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
 
-    {{form}}
+    <form role="form">
+        <legend>Form Title</legend>
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
 
   </div>
 </div>
