@@ -6,3 +6,6 @@ tree
 python-scipy
 python-sklearn
 ntp
+libffi-dev
+python-dev
+libmysqlclient-dev

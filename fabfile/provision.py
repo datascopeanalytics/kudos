@@ -116,6 +116,65 @@ def require_timezone(timezone='America/Chicago', restart_services=()):
             (result.return_code, command)
         raise FabricException(msg)
 
+@task
+@decorators.needs_environment
+def setup_database():
+    """Require MySQL database exists with correct credentials."""
+    fabtools.require.mysql.server(password=env.mysql_root_password)
+    with settings(mysql_user='root', mysql_password=env.mysql_root_password):
+        fabtools.require.mysql.user(env.django_user, env.django_password)
+        fabtools.require.mysql.database(env.django_db, owner=env.django_user)
+
+
+@task
+@decorators.needs_environment
+def setup_django():
+    """render settings and collectstatic
+    """
+    print utils.remote_templates_root()
+    fabtools.files.upload_template(
+        os.path.join(utils.fabfile_templates_root(), "django_settings.py"),
+        os.path.join(env.web_path, "web/settings/local.py"),
+        context=env,
+    )
+
+    # only collectstatic on non-dev environments- in dev, the dev
+    # server handles staticfiles and having things in $root/static
+    # confuses compressor
+    if env.config_type != 'dev':
+        with cd(env.web_path):
+            run("./manage.py collectstatic --noinput")
+
+
+@task
+@decorators.needs_environment
+def setup_apache():
+
+    template = os.path.join(
+        utils.fabfile_templates_root(),
+        "apache.%s.conf" % env.config_type,
+    )
+
+    # require that apache is set up with modwsgi
+    fabtools.require.apache.server()
+    fabtools.require.deb.package('libapache2-mod-wsgi')
+    fabtools.require.apache.module_enabled("wsgi")
+    fabtools.require.apache.module_enabled("rewrite")
+    fabtools.require.apache.module_enabled("expires")
+
+    # enable site with the given configuration
+    fabtools.require.apache.site(
+        env.site_name,
+        template_source=template,
+        site_name=env.site_name,
+        site_root=os.path.join(env.web_path),
+    )
+    fabtools.require.apache.disabled('000-default')
+
+    # set permissions so that apache can read/write
+    sudo("chgrp -R www-data %s" % env.remote_path)
+    sudo("chmod -R g+w %s" % env.remote_path)
+
 
 @task(default=True)
 @decorators.needs_environment
@@ -137,5 +196,10 @@ def default(do_rsync=True):
 
     # set up anything else that should be done on the virtual machine
     # to get it into the same state for everyone
-    setup_shell_environment()
-    setup_analysis()
+    setup_bash()
+    setup_database()
+    setup_django()
+
+    if env.site_name:
+        configure_apache()
+        setup_cron()

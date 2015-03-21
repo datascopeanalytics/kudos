@@ -1,2 +1,22 @@
 PyGithub
 Fabric
+Django>=1.7
+
+# django-base-template requirements
+MySQL-python
+bcrypt
+django_compressor
+bleach
+celery
+django-celery
+python-memcached
+django-debug-toolbar
+#South
+Sphinx
+nose
+mock
+django-nose
+coverage
+pep8
+pyflakes
+pylint

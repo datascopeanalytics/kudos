@@ -52,3 +52,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# templates rendered during provisioning
+/web/web/settings/local.py*
