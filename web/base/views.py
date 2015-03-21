@@ -1,8 +1,11 @@
-""" Views for the base application """
+from django.views.generic.edit import CreateView, UpdateView
 
-from django.shortcuts import render
+from .models import Kudo
 
 
-def home(request):
-    """ Default view for the root """
-    return render(request, 'base/home.html')
+class KudoCreate(CreateView):
+    model = Kudo
+
+
+class KudoUpdate(UpdateView):
+    model = Kudo
