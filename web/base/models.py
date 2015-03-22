@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Kudo(models.Model):
-    giver = models.ForeignKey(User, related_name='giver')
+    giver = models.ForeignKey(User, related_name='giver', editable=False)
     receivers = models.ManyToManyField(User, related_name='receivers')
     date = models.DateField(auto_now_add=True)
     count = models.IntegerField(default=1)

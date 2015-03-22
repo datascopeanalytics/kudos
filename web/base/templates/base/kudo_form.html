@@ -12,8 +12,8 @@
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
 
-    <form role="form">
-        <legend>Form Title</legend>
+    <form role="form" action="{% url 'kudo_create' %}" method="post">
+        <legend>Give a kudo or two</legend>
         {% csrf_token %}
         {{ form|bootstrap }}
         <div class="form-group">

@@ -1,0 +1,18 @@
+{% extends "_layouts/base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <h1>Kudos delivered:</h1>
+    <ul>
+      {% for kudo in object_list %}
+      <li><a href="{% url 'kudo_detail' kudo.id %}">
+        {{kudo}}
+      </a></li>
+      {% empty %}
+      <li>Sad times. You haven't given anyone any kudos yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock content %}
