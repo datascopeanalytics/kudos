@@ -131,6 +131,8 @@ def setup_database():
 def setup_django():
     """render settings and collectstatic
     """
+    sudo("gem install sass")
+
     fabtools.files.upload_template(
         os.path.join(utils.fabfile_templates_root(), "django_settings.py"),
         os.path.join(env.web_path, "web/settings/local.py"),

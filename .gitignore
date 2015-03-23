@@ -53,5 +53,9 @@ docs/_build/
 # PyBuilder
 target/
 
+# sass
+/web/.sass-cache/
+/web/static/CACHE/
+
 # templates rendered during provisioning
 /web/web/settings/local.py*
