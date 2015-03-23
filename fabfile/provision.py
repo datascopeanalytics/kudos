@@ -58,10 +58,23 @@ def debian_packages():
 
 @task
 @decorators.needs_environment
+def ruby_packages():
+    """install debian packages"""
+    with settings(warn_only=True):
+        bundler = run('which bundler')
+    if bundler.return_code:
+        sudo('gem install bundler')
+    filename = os.path.join(utils.remote_requirements_root(), "ruby")
+    run('bundle install --gemfile="%s"' % filename)
+
+
+@task
+@decorators.needs_environment
 def packages():
     """install all packages"""
     debian_packages()
     python_packages()
+    ruby_packages()
 
 
 @task
@@ -131,8 +144,6 @@ def setup_database():
 def setup_django():
     """render settings and collectstatic
     """
-    sudo("gem install sass")
-
     fabtools.files.upload_template(
         os.path.join(utils.fabfile_templates_root(), "django_settings.py"),
         os.path.join(env.web_path, "web/settings/local.py"),
