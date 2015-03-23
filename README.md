@@ -7,7 +7,13 @@ throughout the year
 
 1. `vagrant up` to start the virtual machine
 
-2. `fab dev provision`
+2. `fab dev provision` to install all of the prerequisite software
+
+3. `./manage.py migrate` to load the data into the database
+
+4. Follow [the
+   instructions](http://django-allauth.readthedocs.org/en/latest/providers.html#google)
+   for registering social authentication via google using the `allauth` app. 
 
 ### Internals
 
