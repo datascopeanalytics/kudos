@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse_lazy
 
 from .models import Kudo
 
+
 # https://docs.djangoproject.com/en/1.7/topics/class-based-views/intro/#mixins-that-wrap-as-view
 class LoginRequiredMixin(object):
     @classmethod

@@ -1,3 +1,8 @@
+
+// use bootstrap-chosen to make the forms look consistent with bootstrap
+// https://github.com/alxlit/bootstrap-chosen
+@import "bootstrap-chosen.scss";
+
 // hack to get rid of the multi select stupid ass help message
 .form-group {
   #id_receivers_chosen + p.help-block {
