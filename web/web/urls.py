@@ -17,4 +17,3 @@ urlpatterns = patterns('',
     url(r'^bad/$', bad),
     url(r'', include('base.urls')),
 )
-
