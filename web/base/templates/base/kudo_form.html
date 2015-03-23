@@ -1,9 +1,16 @@
 {% extends "_layouts/base.html" %}
+{% load staticfiles %}
 {% load bootstrap %}
 
 {% block css %}
 {{block.super}}
+<link type="text/x-scss" rel="stylesheet" href="{% static 'scss/kudo_form.scss' %}">
 {% endblock css %}
+
+{% block cdn_css %}
+{{block.super}}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.1/chosen.min.css">
+{% endblock cdn_css %}
 
 {% block page_title %}Kudos | Datascope{% endblock %}
 
@@ -25,3 +32,13 @@
 </div>
 
 {% endblock %}
+
+{% block cdn_js %}
+{{block.super}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.1/chosen.jquery.min.js"></script>
+{% endblock cdn_js %}
+
+{% block js %}
+{{block.super}}
+<script src="{% static 'js/kudo_form.js' %}"></script>
+{% endblock js %}
