@@ -49,12 +49,44 @@
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
   <![endif]-->
   <header>
-    {% block header %}{% endblock %}
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            {% if user.is_authenticated %}
+            Hi {{request.user.first_name}}!
+            <a href="{% url 'account_logout' %}" class="btn btn-default" role="button">
+              <!-- <span class="glyphicon glyphicon-menu-hamburger" area-hidden="true"></span> Logout -->
+              Logout
+            </a>
+            {% else %}
+            <a href="{% url 'account_logout' %}" class="btn btn-default navbar-btn" role="button">
+              <span class="glyphicon glyphicon-menu-hamburger" area-hidden="true"></span> Logout
+            </a>
+            {% endif %}
+            <!-- <button type="button" class="btn btn-default navbar-btn">Sign out</button> -->
+          </li>
+          <li class="dropdown">
+            <button type="button" class="btn btn-default dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">
+              <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> Menu
+            </button>
+            <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <span class="glyphicon glyphicon-menu-hamburger" area-hidden="true"></span> Menu
+            </a> -->
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="{% url 'kudo_create' %}">Give kudos</a></li>
+              <li><a href="{% url 'kudo_list' %}">View kudos you've given</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </header>
 
   <div role="main">
     <div class="container">
-      {% block content %}{% endblock %}      
+      {% block content %}{% endblock %}
     </div>
   </div>
 
