@@ -25,10 +25,6 @@ class KudoCreate(LoginRequiredMixin, CreateView):
         return super(KudoCreate, self).form_valid(form)
 
 
-class KudoDetail(LoginRequiredMixin, DetailView):
-    model = Kudo
-
-
 class KudoList(LoginRequiredMixin, ListView):
     model = Kudo
 
