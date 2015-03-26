@@ -5,6 +5,7 @@ from fabtools.vagrant import vagrant
 
 import utils
 import provision
+import serve
 
 # shared environment between local machines and remote machines
 # (anything that is different gets overwritten in environment-setting
