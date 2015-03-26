@@ -17,7 +17,7 @@ class LoginRequiredMixin(object):
 
 class KudoCreate(LoginRequiredMixin, CreateView):
     model = Kudo
-    success_url = reverse_lazy('kudo_list')
+    success_url = reverse_lazy('kudos_given')
 
     # automatically add the giver based on the current user
     def form_valid(self, form):
@@ -28,7 +28,16 @@ class KudoCreate(LoginRequiredMixin, CreateView):
 class KudoList(LoginRequiredMixin, ListView):
     model = Kudo
 
+class KudosGiven(KudoList):
+    template_name = "base/kudos_given.html"
     def get_queryset(self):
         return self.model.objects.filter(
             giver=self.request.user,
+        )
+
+class KudosReceived(KudoList):
+    template_name = "base/kudos_received.html"
+    def get_queryset(self):
+        return self.model.objects.filter(
+            receivers=self.request.user,
         )
