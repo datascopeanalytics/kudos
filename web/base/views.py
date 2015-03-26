@@ -31,3 +31,8 @@ class KudoDetail(LoginRequiredMixin, DetailView):
 
 class KudoList(LoginRequiredMixin, ListView):
     model = Kudo
+
+    def get_queryset(self):
+        return self.model.objects.filter(
+            giver=self.request.user,
+        )

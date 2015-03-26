@@ -7,7 +7,11 @@
     <ul>
       {% for kudo in object_list %}
       <li><a href="{% url 'kudo_detail' kudo.id %}">
-        {{kudo}}
+        <span class="count">{{kudo.count}}</span> for
+        {% for receiver in kudo.receivers.iterator %}
+        <span class="receiver">{{receiver}}</span>
+        {% endfor %}
+        from <span class="giver">{{kudo.giver}}</span>
       </a></li>
       {% empty %}
       <li>Sad times. You haven't given anyone any kudos yet.</li>
