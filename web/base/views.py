@@ -24,6 +24,18 @@ class KudoCreate(LoginRequiredMixin, CreateView):
         form.instance.giver = self.request.user
         return super(KudoCreate, self).form_valid(form)
 
+    # override the queryset on the receivers model so you can't give any kudos
+    # to yourself. this needs to be here so we have access to the request.user
+    # instance
+    #
+    # inspiration from http://stackoverflow.com/a/16685089/564709
+    def get_form(self, *args, **kwargs):
+        form = super(KudoCreate, self).get_form(*args, **kwargs)
+        form.fields['receivers'].queryset = \
+            form.fields['receivers'].queryset.exclude(
+                username=self.request.user.username,
+            )
+        return form
 
 class KudoList(LoginRequiredMixin, ListView):
     model = Kudo
