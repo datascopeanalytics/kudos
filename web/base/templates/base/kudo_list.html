@@ -1,18 +1,25 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+{{block.super}}
+<link type="text/x-scss" rel="stylesheet" href="{% static 'scss/kudo_list.scss' %}">
+{% endblock css %}
 
 {% block content %}
 <div class="row">
   <div class="col-md-12">
-    <h1>Kudos delivered:</h1>
+    <h1>That's awfully nice of you, {{user}}!</h1>
     <ul>
       {% for kudo in object_list %}
-      <li><a href="{% url 'kudo_detail' kudo.id %}">
-        <span class="count">{{kudo.count}}</span> for
+      <li class="kudo">
+        <span class="count">{{kudo.count}}</span> kudo{{kudo.count|pluralize}} given to
         {% for receiver in kudo.receivers.iterator %}
         <span class="receiver">{{receiver}}</span>
         {% endfor %}
         from <span class="giver">{{kudo.giver}}</span>
-      </a></li>
+        for <span class="message">{{kudo.message}}</span>
+      </li>
       {% empty %}
       <li>Sad times. You haven't given anyone any kudos yet.</li>
       {% endfor %}

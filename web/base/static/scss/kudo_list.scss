@@ -1,0 +1,11 @@
+ul {
+  list-style-type: none;
+  li.kudo {
+    color: #bbb;
+    margin-top: 1em;
+    .count, .receiver, .giver, .message {
+      color: #333;
+      font-weight: bold;
+    }
+  }
+}
