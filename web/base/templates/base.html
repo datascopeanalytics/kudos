@@ -29,7 +29,7 @@
   {% endblock cdn_css %}
 
   {% compress css %}
-  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <link type="text/x-scss" rel="stylesheet" href="{% static 'scss/base.scss' %}">
   {% block css %}{% endblock %}
   {% endcompress %}
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
@@ -51,7 +51,6 @@
   <header>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
-
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <button type="button" class="btn btn-default dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">
