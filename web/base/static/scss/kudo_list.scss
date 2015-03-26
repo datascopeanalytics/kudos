@@ -1,5 +1,16 @@
+h1 {
+  text-align: center;
+}
+
+.histogram {
+  img {
+    width: 100%;
+  }
+}
+
 ul {
   list-style-type: none;
+  padding: 0;
   li.kudo {
     color: #bbb;
     margin-top: 1em;
