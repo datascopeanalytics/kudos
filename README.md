@@ -13,7 +13,13 @@ throughout the year
 
 4. Follow [the
    instructions](http://django-allauth.readthedocs.org/en/latest/providers.html#google)
-   for registering social authentication via google using the `allauth` app. 
+   for registering social authentication via google using the `allauth` app.
+
+5. Create a user by running the server and logging in for the first time
+
+6. If you're so inclined, you can simulate a whole buncha kudos by running
+   `./manage.py simulate_kudos` (kudos messages courtesy of [this heartfelt
+   site](http://smstosay.com/thanks-sms/20-sms-to-say-thank-you-sms-to-say-thanks/))
 
 ### Internals
 
