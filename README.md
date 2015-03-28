@@ -11,15 +11,19 @@ throughout the year
 
 3. `./manage.py migrate` to load the data into the database
 
-4. Follow [the
+4. `./manage.py createsuperuser` to create a superuser account
+
+5. Follow [the
    instructions](http://django-allauth.readthedocs.org/en/latest/providers.html#google)
    for registering social authentication via google using the `allauth` app.
 
-5. Create a user by running the server and logging in for the first time
+6. Create a user by running the server with `fab dev serve` and logging in for
+   the first time:
 
-6. If you're so inclined, you can simulate a whole buncha kudos by running
+7. If you're so inclined, you can simulate a whole buncha kudos by running
    `./manage.py simulate_kudos` (kudos messages courtesy of [this heartfelt
-   site](http://smstosay.com/thanks-sms/20-sms-to-say-thank-you-sms-to-say-thanks/))
+   site](http://smstosay.com/thanks-sms/20-sms-to-say-thank-you-sms-to-say-thanks/)).
+   To do this you'll need to `vagrant ssh` and then `cd web/ && ./manage simulate_kudos`.
 
 ### Internals
 
