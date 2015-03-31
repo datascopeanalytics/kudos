@@ -1,6 +1,6 @@
 import os
 
-from fabric.api import env, task, execute
+from fabric.api import env, task, execute, run
 from fabtools.vagrant import vagrant
 
 import utils
@@ -14,8 +14,8 @@ env.mysql_root_password = 'tiyp,kudos'
 env.django_user = 'kudos'
 env.django_password = 'tiyp,kudos'
 env.django_db = 'kudos'
-# env.repository_path = 'git@github.com:datascopeanalytics/kudos.git'
-# env.ssh_directory = os.path.expanduser(os.path.join('~', '.ssh'))
+env.repository_path = 'git@github.com:datascopeanalytics/kudos.git'
+env.ssh_directory = os.path.expanduser(os.path.join('~', '.ssh'))
 web_directory = "web"
 
 
@@ -34,14 +34,15 @@ def dev():
     execute(vagrant, env.hosts[0])
 
 
-# @task
-# def prod():
-#     env.provider = "digitalocean"
-#     env.remote_path = '/srv/www/kudos'
-#     env.web_path = os.path.join(env.remote_path, web_directory)
-#     env.config_type = 'production'
-#     env.branch = 'master'
-#     env.use_repository = True
-#     env.site_name = 'kudos.datasco.pe'
-#
-#     utils.set_env_with_ssh('kudos')
+@task
+def prod():
+    env.provider = "digitalocean"
+    env.remote_path = '/srv/www/kudos'
+    env.web_path = os.path.join(env.remote_path, web_directory)
+    env.config_type = 'production'
+    env.branch = 'master'
+    env.use_repository = True
+    env.site_name = 'kudos.datasco.pe'
+    env.django_site_id = 2
+
+    utils.set_env_with_ssh('kudos')
