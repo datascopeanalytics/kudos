@@ -188,17 +188,22 @@ def setup_django():
         context=env,
     )
 
-    # only collectstatic on non-dev environments- in dev, the dev
-    # server handles staticfiles and having things in $root/static
-    # confuses compressor
-    if env.config_type != 'dev':
-        with cd(env.web_path):
+    with cd(env.web_path):
+
+        # migrate the database as needed and make sure the proper sites
+        # are configured
+        run("./manage.py migrate")
+
+        if env.config_type != 'dev':
+
+            # only collectstatic on non-dev environments- in dev, the dev
+            # server handles staticfiles and having things in $root/static
+            # confuses compressor
             run("./manage.py collectstatic --noinput")
 
-    # migrate the database as needed and make sure the proper sites
-    # are configured
-    run("./manage.py migrate")
-    run("./manage.py add_sites %(django_site_id)s %(site_name)s" % env)
+            # only add this site in non-dev environments. the dev
+            # environment already has localhost as a default site
+            run("./manage.py add_sites %(django_site_id)s %(site_name)s" % env)
 
 
 @task
