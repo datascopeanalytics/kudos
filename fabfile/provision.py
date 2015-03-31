@@ -195,6 +195,11 @@ def setup_django():
         with cd(env.web_path):
             run("./manage.py collectstatic --noinput")
 
+    # migrate the database as needed and make sure the proper sites
+    # are configured
+    run("./manage.py migrate")
+    run("./manage.py add_sites %(django_site_id)s %(site_name)s" % env)
+
 
 @task
 @decorators.needs_environment
